@@ -23,20 +23,15 @@ namespace BinaryBoarding
             
             for (int i = 0; i < results.Count - 1; i++)
             {
-                if (i + 1 < results.Count)
+                if (results[i + 1] - results[i] == 2)
                 {
-                    if (results[i + 1] - results[i] == 2)
-                    {
-                        Console.WriteLine($"Solution 2: {results[i] + 1}");
-                    }
+                    Console.WriteLine($"Solution 2: {results[i] + 1}");
                 }
             }
-
         }
 
         static int CalculateRow(string str)
         {
-
             var lowerRowBound = 0;
             var upperRowBound = 127;
 
