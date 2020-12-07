@@ -9,7 +9,7 @@ namespace CustomCustoms
     {
         static void Main(string[] args)
         {
-            var filePath = @"R:\Code\2020-advent-of-code\6-custom-customs\CustomCustoms\data.txt";
+            var filePath = @"R:\Code\2020-advent-of-code\6-custom-customs\data.txt";
             var lines = File.ReadAllLines(filePath);
 
             var results = new List<int>();

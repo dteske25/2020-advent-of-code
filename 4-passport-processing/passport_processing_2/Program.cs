@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace passport_processing_2
+namespace PassportProcessing
 {
     class Program
     {
