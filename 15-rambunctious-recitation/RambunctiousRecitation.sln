@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RambunctiousRecitation", "RambunctiousRecitation.csproj", "{BDF5108F-976C-4F3D-BDC2-E2A514A63479}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDF5108F-976C-4F3D-BDC2-E2A514A63479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDF5108F-976C-4F3D-BDC2-E2A514A63479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDF5108F-976C-4F3D-BDC2-E2A514A63479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDF5108F-976C-4F3D-BDC2-E2A514A63479}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49C5BD6D-031E-4C72-BD4E-5F02A7E948D4}
+	EndGlobalSection
+EndGlobal
