@@ -12,10 +12,10 @@ namespace Something
     {
         static void Main(string[] args)
         {
-            var filePath = @"R:\Code\2020-advent-of-code\Something\data_1.txt";
+            var filePath = @"R:\Code\2020-advent-of-code\19-monster-messages\data_1.txt";
             var lines = File.ReadAllLines(filePath).ToList();
             PartOne(lines);
-            filePath = @"R:\Code\2020-advent-of-code\Something\part_2\data_input.txt";
+            filePath = @"R:\Code\2020-advent-of-code\19-monster-messages\part_2\data_input.txt";
             lines = File.ReadAllLines(filePath).ToList();
             PartTwo(lines);
         }
@@ -31,16 +31,17 @@ namespace Something
                 var lexer = new MonsterMessagesLexer(inputStream);
                
                 CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
-                var parser = new MonsterMessagesParser(commonTokenStream);
+                var output = new StringWriter();
+                var error = new StringWriter();
+                var parser = new MonsterMessagesParser(commonTokenStream, output, error);
                 var messageRule = parser.message();
                 var visitor = new MonsterMessagesVisitor();
                 visitor.VisitMessage(messageRule);
-                if (visitor.IsValid)
+                if (string.IsNullOrEmpty(error.ToString()))
                 {
                     result++;
                 }
             }
-            // Tried 479
             Console.WriteLine($"Solution 2: {result}");
         }
 
