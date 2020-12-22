@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace JurassicJigsaw
 {
@@ -10,7 +11,7 @@ namespace JurassicJigsaw
     {
         static void Main(string[] args)
         {
-            var filePath = @"R:\Code\2020-advent-of-code\JurassicJigsaw\data.txt";
+            var filePath = @"R:\Code\2020-advent-of-code\20-jurassic-jigsaw\data.txt";
             var lines = File.ReadAllLines(filePath).ToList();
             var tiles = PartOne(lines);
             PartTwo(tiles);
@@ -63,18 +64,53 @@ namespace JurassicJigsaw
             foreach (var row in tileArangement)
             {
                 solvedPuzzle.AddRange(CombinePuzzleRow(row));
-                Console.WriteLine();
             }
 
+            FlipData(solvedPuzzle);
+            RotateData(solvedPuzzle);
+            RotateData(solvedPuzzle);
+            RotateData(solvedPuzzle);
+
+            PrintData(solvedPuzzle);
 
             var regexLn1 = "..................#.";
             var regexLn2 = "#....##....##....###";
             var regexLn3 = ".#..#..#..#..#..#...";
 
-            
+            var fullRegex = regexLn1 + regexLn2 + regexLn3;
 
-            // 145 is too low
-            Console.WriteLine($"Solution 2: ");
+            var count = fullRegex.Count(c => c == '#');
+
+            var total = solvedPuzzle.Sum(c => c.Count(c => c == '#'));
+
+            var nessiesFound = 0;
+            var matches = new List<string>();
+
+            for (int i = 2; i < solvedPuzzle.Count; i++)
+            {
+                for (int j = 0; j < solvedPuzzle[i].Count - regexLn3.Length; j++)
+                {
+                    var topRow = string.Join("", solvedPuzzle[i - 2]).Substring(j, regexLn3.Length);
+                    var middleRow = string.Join("", solvedPuzzle[i - 1]).Substring(j, regexLn3.Length);
+                    var bottomRow = string.Join("", solvedPuzzle[i]).Substring(j, regexLn3.Length);
+
+                    var sb = new StringBuilder();
+                    sb.Append(topRow);
+                    sb.Append(middleRow);
+                    sb.Append(bottomRow);
+
+                    matches.Add(sb.ToString());
+
+                    if (Regex.IsMatch(sb.ToString(), fullRegex))
+                    {
+                        nessiesFound++;
+                    }
+                }
+            }
+
+            var totalUsed = nessiesFound * count;
+            var result = total - totalUsed;
+            Console.WriteLine($"Solution 2: {result}");
         }
 
 
@@ -88,9 +124,7 @@ namespace JurassicJigsaw
                 foreach (var tile in row)
                 {
                     result[i].AddRange(tile.TrimmedData[i]);
-                    Console.Write($"{string.Join("", tile.TrimmedData[i])} ");
                 }
-                Console.WriteLine();
             }
             return result;
         }
@@ -209,6 +243,26 @@ namespace JurassicJigsaw
                 }
             }
         }
+
+        public static void FlipData(List<List<char>> data)
+        {
+            data.ForEach(d => d.Reverse());
+        }
+
+        public static void PrintData(List<List<char>> data)
+        {
+            foreach (var row in data)
+            {
+                foreach (var c in row)
+                {
+                    Console.Write($"{c}");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+
+
 
         private static List<Tile> PartOne(List<string> lines)
         {
